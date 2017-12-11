@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -13,7 +14,7 @@ module.exports = {
         ]
     },
     output: {
-        filename: 'public/js/[name]-[hash:5].js',
+        filename: './public/js/[name]-[hash:5].js',
         path: path.join(__dirname, '../build')
     },
     module: {
@@ -27,6 +28,13 @@ module.exports = {
                         presets: ["es2015", "stage-0"]
                     }
                 }
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             }
         ]
     },
@@ -36,6 +44,13 @@ module.exports = {
                 NODE_ENV: "prod"
             }
         }),
-        new LiveReloadPlugin({appendScriptTag: true})
+        new LiveReloadPlugin({appendScriptTag: true}),
+        new ExtractTextPlugin("/public/css/[name]-[hash:5].css"),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console: true
+            }
+        })
     ]
 };

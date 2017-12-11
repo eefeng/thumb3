@@ -1,4 +1,6 @@
 
+import css from '../css/index.css';
+
 class PraiseButton {
 
     constructor($ele, option) {
