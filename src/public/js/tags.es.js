@@ -10,7 +10,7 @@ xtag.register('x-praise', {
     lifecycle:{
         created: function(){},
         inserted: function(){},
-        removed: function(){},
+        removed: function(){ console.log(1)},
         attributeChanged: function(){}
     },
     methods: {
