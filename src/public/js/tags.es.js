@@ -1,3 +1,6 @@
+import PraiseButton from './index.es';
+
+const f = new PraiseButton();
 xtag.register('x-praise', {
     content: '<div class="hand" id="thumb">' +
     '<div class="finger"></div>' +
@@ -7,25 +10,34 @@ xtag.register('x-praise', {
     '<div class="finger thumb"></div>' +
     '<div class="arm"></div>\n' +
     '</div>',
-    lifecycle:{
-        created: function(){},
-        inserted: function(){},
-        removed: function(){ console.log(1)},
-        attributeChanged: function(){}
-    },
+
     methods: {
-        someMethod: function(){}
+       praise: function () {
+           let _this = this;
+           f.clickAction();
+
+           let animationEle = _this.querySelector('#animation');
+           animationEle.className = "hide num";
+           setTimeout(function () {
+               animationEle.className = "hide";
+           }, 800)
+       }
     },
-    accessors: {
-        someAccessor: {
-            // links to the 'some-accessor' attribute
-            attribute: {},
-            set: function(){},
-            get: function(){}
-        }
-    },
+
     events: {
-        tap: function(){},
-        focus: function(){}
+       click: function (e) {
+           let _this = this;
+           if(e.target.id === 'thumb') {
+               let t = '';
+               if(t) {
+                   clearTimeout(t);
+               }
+
+               t = setTimeout(() => {
+                   this.praise();
+               }, 500);
+               
+           }
+       }
     }
 });
