@@ -1,0 +1,40 @@
+<head><link href=".././public/css/vendor-4149b.css" rel="stylesheet"></head>{% extends 'layout.html' %}
+{% block title %}My Page{% endblock %}
+{% block head %}
+{% parent %}
+<link rel="stylesheet" href="../css/index.css">
+
+c
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+<script src="http://cdn.bootcss.com/systemjs/0.20.2/system.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.17.1/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/x-tag/1.5.11/x-tag-core.min.js"></script>
+
+<script src="../js/main.js"></script>
+<script src="../js/tags.js"></script>
+
+{% endblock %}
+{% block content %}
+<x-praise></x-praise>
+
+<span class="hide" id="animation">+1</span>
+
+<script type="text/javascript">
+
+    SystemJS.config({
+        baseURL: '/js'
+    });
+
+    SystemJS.import('index.js').then(function(m) {
+        $.extend({
+            Thumb: m.default.Thumb
+        });
+
+        new $.Thumb($('#thumb'), {
+            clickNum: 0,
+            maxClickNum: 10,
+            timerSeconds: 1
+        });
+    });
+</script>
+{% endblock %}<script type="text/javascript" src="../public/js/common/vendor-4149b.min.js"></script><script type="text/javascript" src=".././public/js/tags-4149b.js"></script><script type="text/javascript" src=".././public/js/index-4149b.js"></script>

@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -49,6 +50,15 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'public/js/common/[name]-[hash:5].min.js'
+        }),
+        new HtmlWebpackPlugin({
+            filename: './views/layout.html',
+            template: 'src/views/layout.html',
+            inject: false
+        }),
+        new HtmlWebpackPlugin({
+            filename: './views/index.html',
+            template: 'src/views/index.html'
         })
     ]
 };
